@@ -5,15 +5,15 @@
 package selom.services;
 
 import java.util.List;
-import selom.entities.Sms;
+import selom.entities.Souscription;
 
 /**
  *
  * @author m2pro
  */
-public interface SmsServiceBeanLocal {
+public interface SouscriptionServiceBeanLocal {
     
-    public List<Sms> getAll();
+    public List<Souscription> getAll();
     
     public void ajouter();
     
@@ -21,4 +21,3 @@ public interface SmsServiceBeanLocal {
     
     public void supprimer();
 }
-
