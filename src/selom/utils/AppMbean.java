@@ -9,17 +9,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import selom.MainClass;
+import selom.managedbeans.MainClass;
 
 /**
  *
  * @author m2pro
  */
-public class MakeConnection {
+public class AppMbean {
 
     static Connection conn = null;
 
-    public MakeConnection() {
+    public AppMbean() {
     }
 
     public final Connection makeConnection() throws SQLException {
