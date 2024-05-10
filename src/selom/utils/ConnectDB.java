@@ -9,17 +9,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import selom.managedbeans.MainClass;
 
 /**
  *
  * @author m2pro
  */
-public class AppMbean {
+public class ConnectDB {
 
     static Connection conn = null;
 
-    public AppMbean() {
+    public ConnectDB() {
     }
 
     public final Connection makeConnection() throws SQLException {
@@ -28,7 +27,7 @@ public class AppMbean {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException ex) {                
-                Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
             }
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3309/bd_tppoo_sadzomla", "root", "");
         }
