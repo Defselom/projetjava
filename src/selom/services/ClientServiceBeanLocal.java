@@ -13,11 +13,11 @@ import selom.entities.Client;
  */
 public interface ClientServiceBeanLocal {
     
-    public List<Client> getAll();
+    void save(final Client t);
+     
+    List<Client> findAll();
     
-    public void ajouter();
+    Client findById(int k);
     
-    public void modifier();
-    
-    public void supprimer();
+    void deleteById(int k);
 }
