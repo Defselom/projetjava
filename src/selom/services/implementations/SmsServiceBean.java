@@ -85,7 +85,29 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
 
     @Override
     public Sms findById(int smsId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         Sms sms = null;
+        try {
+            cn.makeConnection();
+
+            String requeteGetById = "SELECT * FROM `Sms` WHERE id = ?";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(requeteGetById);
+            PreparedStmt.setInt(1, smsId);
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                sms = new Sms();
+                sms.setId(rs.getInt("id"));
+                 Client client = new Client();
+                client.setId(rs.getInt("idClient"));
+                sms.setIdClient(client);
+                sms.setLibelle(rs.getString("libelle"));
+                sms.setStatus(rs.getString("status"));
+            }
+            return sms;
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

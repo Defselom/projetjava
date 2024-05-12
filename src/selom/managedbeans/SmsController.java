@@ -35,8 +35,8 @@ public class SmsController {
             Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-     public void getAllSms() {
+
+    public void getAllSms() {
         try {
             List<Sms> allSms = smsService.findAll();
             System.out.println(" SMS recuperé avec succès !");
@@ -45,10 +45,31 @@ public class SmsController {
                 System.out.println("id Client : " + sms.getIdClient().getId());
                 System.out.println("libellé : " + sms.getLibelle());
                 System.out.println("status : " + sms.getStatus());
-                System.out.println(); 
+                System.out.println();
             }
         } catch (Exception e) {
             Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public void getById(int smsId) {
+        try {
+            Sms sms = smsService.findById(smsId);
+            if (sms != null) {
+                // Afficher les informations du client
+                System.out.println("SMS récupéré avec succès !");
+                System.out.println("ID : " + sms.getId());
+                System.out.println("client id : " + sms.getIdClient().getId());
+                System.out.println("libellé : " + sms.getLibelle());
+                System.out.println("status : " + sms.getStatus());
+            } else {
+                System.out.println("Aucun SMS trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+
 }
