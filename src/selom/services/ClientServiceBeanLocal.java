@@ -13,7 +13,7 @@ import selom.entities.Client;
  */
 public interface ClientServiceBeanLocal {
     
-    void save(final Client t);
+    void save(final Client client);
      
     List<Client> findAll();
     
