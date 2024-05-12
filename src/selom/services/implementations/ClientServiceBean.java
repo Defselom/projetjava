@@ -28,7 +28,7 @@ public class ClientServiceBean implements ClientServiceBeanLocal  {
     }
     
   
-     public void save2(Client client) {
+     public void save(Client client) {
         try {
             //
             cn.makeConnection();
@@ -60,10 +60,6 @@ public class ClientServiceBean implements ClientServiceBeanLocal  {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void save(Client t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+   
 
 }
