@@ -49,9 +49,8 @@ public class ProduitController {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    
-     public void getById(int produitId) {
+
+    public void getById(int produitId) {
         try {
             Produit produit = produitService.findById(produitId);
             if (produit != null) {
@@ -69,6 +68,24 @@ public class ProduitController {
         }
 
     }
-    
+
+    public void update(Produit updateProduit) {
+        try {
+            Produit produit = produitService.findById(updateProduit.getId());
+            if (produit != null) {
+                int rowsUpdated = produitService.update(updateProduit);
+                if (rowsUpdated > 0) {
+                    System.out.println("Produit mis à jour avec succès !");
+                } else {
+                    System.out.println("La mise à jour du produit a échoué.");
+                }
+            } else {
+                System.out.println("Aucun produit trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
 }

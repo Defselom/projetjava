@@ -106,8 +106,20 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
     }
 
     @Override
-    public int update(Produit Client) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int update(Produit produit) {
+          try {
+            cn.makeConnection();
+            String requeteUpdate = "UPDATE `Produit` SET libelle = ?, actif = ? WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteUpdate);
+            preparedStmt.setString(1, produit.getLibelle());
+            preparedStmt.setString(2, produit.getActif());
+            preparedStmt.setInt(3, produit.getId());
+             int rowsUpdated = preparedStmt.executeUpdate();
+             return rowsUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
     @Override
