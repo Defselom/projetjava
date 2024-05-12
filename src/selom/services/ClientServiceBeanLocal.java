@@ -17,7 +17,7 @@ public interface ClientServiceBeanLocal {
      
     List<Client> findAll();
     
-    Client findById(int k);
+    Client findById(int clientId);
     
-    void deleteById(int k);
+    void deleteById(int clientId);
 }

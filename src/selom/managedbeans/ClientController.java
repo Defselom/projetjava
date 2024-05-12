@@ -62,4 +62,40 @@ public class ClientController {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public void getById(int clientId) {
+        try {
+            Client client = clientService.findById(clientId);
+            if (client != null) {
+                // Afficher les informations du client
+                System.out.println("Client récupéré avec succès !");
+                System.out.println("ID : " + client.getId());
+                System.out.println("Nom : " + client.getNom());
+                System.out.println("Prénom : " + client.getPrenom());
+                System.out.println("Téléphone : " + client.getTelephone());
+            } else {
+                System.out.println("Aucun client trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+    }
+    
+    
+    public void deleteById(int clientId){
+         try {
+            Client client = clientService.findById(clientId);
+            if (client != null) {
+               clientService.deleteById(clientId);
+                System.out.println("Client supprimé avec succès !");
+            } else {
+                System.out.println("Aucun client trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }

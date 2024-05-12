@@ -70,7 +70,6 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
                 client.setPrenom(rs.getString("prenom"));
                 client.setTelephone(rs.getString("telephone"));
 
-                // Ajoutez les autres colonnes si nécessaire
                 clients.add(client);
             }
             return clients;
@@ -81,15 +80,44 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
     }
 
     @Override
-    public Client findById(int k
+    public Client findById(int clientId
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Client client = null;
+        try {
+            cn.makeConnection();
+
+            String requeteGetById = "SELECT * FROM `Client` WHERE id = ?";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(requeteGetById);
+            PreparedStmt.setInt(1, clientId);
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                client = new Client();
+                client.setId(rs.getInt("id"));
+                client.setNom(rs.getString("nom"));
+                client.setPrenom(rs.getString("prenom"));
+                client.setTelephone(rs.getString("telephone"));
+            }
+            return client;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
-    public void deleteById(int k
+    public void deleteById(int clientId
     ) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        try {
+            cn.makeConnection();
 
+            String requeteDelete = "DELETE FROM `Client` WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteDelete);
+            preparedStmt.setInt(1, clientId);
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
