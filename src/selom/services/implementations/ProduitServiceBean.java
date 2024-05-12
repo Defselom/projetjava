@@ -4,9 +4,14 @@
  */
 package selom.services.implementations;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import selom.entities.Produit;
 import selom.services.ProduitServiceBeanLocal;
+import selom.utils.ConnectDB;
 
 /**
  *
@@ -14,14 +19,35 @@ import selom.services.ProduitServiceBeanLocal;
  */
 public class ProduitServiceBean implements ProduitServiceBeanLocal {
 
+      private final ConnectDB cn;
+
+    public ProduitServiceBean() {
+        this.cn = new ConnectDB();
+    }
+    
+    
     @Override
     public List<Produit> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void ajouter() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void save(Produit produit) {
+        
+         try {
+            //
+            cn.makeConnection();
+            //
+            String RequeteAjout = "INSERT INTO `produit`(`libelle`,`actif`) "
+                    + "VALUES (?,?)";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout);
+            PreparedStmt.setString(1, produit.getLibelle());
+            PreparedStmt.setString(2, produit.getActif());
+            PreparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
@@ -33,5 +59,7 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
     public void supprimer() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+  
     
 }

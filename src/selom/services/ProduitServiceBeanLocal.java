@@ -14,7 +14,7 @@ import selom.entities.Produit;
 public interface ProduitServiceBeanLocal {
       public List<Produit> getAll();
     
-    public void ajouter();
+    public void save(Produit produit);
     
     public void modifier();
     

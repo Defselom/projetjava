@@ -6,6 +6,7 @@ package selom;
 
 import java.util.logging.Logger;
 import selom.entities.Client;
+import selom.managedbeans.ClientController;
 import selom.services.implementations.ClientServiceBean;
 
 /**
@@ -30,19 +31,17 @@ public class Ppoo_sadzomla {
         def.setTelephone("99780518");
         
         
-       // Assuming you have instantiated ClientServiceBean somewhere in your application context
-ClientServiceBean clientService = new ClientServiceBean();
-
-// Create a new client object
-Client client = new Client();
-client.setNom("bezos ");
-client.setPrenom("jeff");
-client.setTelephone("90959090");
+ClientServiceBean monService = new ClientServiceBean();
+        ClientController clientController = new ClientController(monService);
 // Set other properties of the client as needed
 
 try {
     // Call the save method to save the client
-    clientService.save2(client);
+clientController.addInitCLient();
+
+clientController.addInitCLient();
+clientController.saveClient(def);
+
     System.out.println("Client saved successfully!");
 } catch (Exception e) {
     // Handle any exceptions that may occur during the saving process
