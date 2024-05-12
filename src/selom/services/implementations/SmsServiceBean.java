@@ -85,7 +85,7 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
 
     @Override
     public Sms findById(int smsId) {
-         Sms sms = null;
+        Sms sms = null;
         try {
             cn.makeConnection();
 
@@ -97,7 +97,7 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
             while (rs.next()) {
                 sms = new Sms();
                 sms.setId(rs.getInt("id"));
-                 Client client = new Client();
+                Client client = new Client();
                 client.setId(rs.getInt("idClient"));
                 sms.setIdClient(client);
                 sms.setLibelle(rs.getString("libelle"));
@@ -112,7 +112,21 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
 
     @Override
     public int update(Sms sms) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            cn.makeConnection();
+            String requeteUpdate = "UPDATE `Sms` SET idClient = ?, libelle = ?, status = ? WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteUpdate);
+            preparedStmt.setInt(1, sms.getIdClient().getId());
+            preparedStmt.setString(2, sms.getLibelle());
+            preparedStmt.setString(3, sms.getStatus());
+            preparedStmt.setInt(4, sms.getId());
+
+            int rowsUpdated = preparedStmt.executeUpdate();
+            return rowsUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 
     @Override

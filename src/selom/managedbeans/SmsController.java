@@ -72,4 +72,24 @@ public class SmsController {
 
     }
 
+    
+     public void update(Sms updateSms){
+         try {
+            Sms sms = smsService.findById(updateSms.getId());
+            if (sms != null) {
+              int rowsUpdated = smsService.update(updateSms);
+               if (rowsUpdated > 0) {
+            System.out.println("SMS mis à jour avec succès !");
+                } else {
+                    System.out.println("La mise à jour du SMS a échoué.");
+                }
+            } else {
+                System.out.println("Aucun SMS trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
 }
