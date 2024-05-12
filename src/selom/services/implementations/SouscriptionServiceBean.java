@@ -41,21 +41,18 @@ public class SouscriptionServiceBean implements SouscriptionServiceBeanLocal {
             // traitement de la date 
             java.util.Date instantDate = new java.util.Date();
             java.sql.Date nowDate = new java.sql.Date(instantDate.getTime());
-            
-            
-            
+
             cn.makeConnection();
             //
             String RequeteAjout = "INSERT INTO `souscription`(`dateHeureSous`,`actif`,`idClient`,`idProduit`) "
                     + "VALUES (?,?,?,?)";
-            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout, Statement.RETURN_GENERATED_KEYS);
             PreparedStmt.setDate(1, nowDate);
             PreparedStmt.setString(2, souscription.getActif());
             PreparedStmt.setInt(3, souscription.getIdClient().getId());
             PreparedStmt.setInt(4, souscription.getIdProduit().getId());
             PreparedStmt.executeUpdate();
-            
-            
+
             ResultSet res = PreparedStmt.getGeneratedKeys();
             while (res.next()) {
                 int souscriptionId = res.getInt(1);

@@ -74,10 +74,11 @@ public class Ppoo_sadzomla {
 // Set other properties of the client as needed
         try {
             // Call the save method to save the client
-            clientController.saveClient(def);
-            produitController.saveProduit(cafe);
-            souscriptionController.save(mySouscription);
-            smsController.save(mySms);
+           // clientController.saveClient(def);
+          //  produitController.saveProduit(cafe);
+          //  souscriptionController.save(mySouscription);
+          //  smsController.save(mySms);
+            clientController.getAllClient();
 
         } catch (Exception e) {
             // Handle any exceptions that may occur during the saving process

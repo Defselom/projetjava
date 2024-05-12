@@ -46,4 +46,20 @@ public class ClientController {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public void getAllClient() {
+        try {
+            List<Client> clients = clientService.findAll();
+            System.out.println("Client recupere avec succès !");
+            for (Client client : clients) {
+                System.out.println("ID : " + client.getId());
+                System.out.println("Nom : " + client.getNom());
+                System.out.println("Prénom : " + client.getPrenom());
+                System.out.println("Téléphone : " + client.getTelephone());
+                System.out.println(); // Ajouter une ligne vide pour séparer les clients
+            }
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }
