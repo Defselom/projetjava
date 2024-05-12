@@ -5,7 +5,9 @@
 package selom.services.implementations;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,11 +40,17 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
             //
             String RequeteAjout = "INSERT INTO `sms`(`idClient`,`libelle`,`status`) "
                     + "VALUES (?,?,?)";
-            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout);
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout, Statement.RETURN_GENERATED_KEYS);
             PreparedStmt.setInt(1, sms.getIdClient().getId());
             PreparedStmt.setString(2, sms.getLibelle());
             PreparedStmt.setString(3, sms.getStatus());
             PreparedStmt.executeUpdate();
+
+            ResultSet res = PreparedStmt.getGeneratedKeys();
+            while (res.next()) {
+                int smsId = res.getInt(1);
+                sms.setId(smsId);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
         }
