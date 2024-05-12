@@ -5,7 +5,9 @@
 package selom.services.implementations;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,10 +42,15 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
             //
             String RequeteAjout = "INSERT INTO `produit`(`libelle`,`actif`) "
                     + "VALUES (?,?)";
-            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout);
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout,Statement.RETURN_GENERATED_KEYS);
             PreparedStmt.setString(1, produit.getLibelle());
             PreparedStmt.setString(2, produit.getActif());
             PreparedStmt.executeUpdate();
+             ResultSet res = PreparedStmt.getGeneratedKeys();
+            while (res.next()) {
+                int produitId = res.getInt(1);
+                produit.setId(produitId);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
         }
