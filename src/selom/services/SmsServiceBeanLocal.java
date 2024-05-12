@@ -15,7 +15,7 @@ public interface SmsServiceBeanLocal {
     
     public List<Sms> getAll();
     
-    public void ajouter();
+    public void save(Sms sms);
     
     public void modifier();
     
