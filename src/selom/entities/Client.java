@@ -51,6 +51,33 @@ public class Client implements Serializable {
     public Client() {
     }
 
+    public Client(String nom, String prenom, String telephone) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+    }
+
+    public Client(Integer id, String nom, String prenom, String telephone) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+    }
+    
+    
+
+    public Client(Integer id, String nom, String prenom, String telephone, Collection<Sms> smsCollection, Collection<Souscription> souscriptionCollection) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.telephone = telephone;
+        this.smsCollection = smsCollection;
+        this.souscriptionCollection = souscriptionCollection;
+    }
+
+    
+    
+    
     public Client(Integer id) {
         this.id = id;
     }
