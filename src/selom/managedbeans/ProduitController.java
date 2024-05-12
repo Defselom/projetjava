@@ -88,4 +88,19 @@ public class ProduitController {
         }
     }
 
+    public void deleteById(int produitId) {
+        try {
+            Produit produit = produitService.findById(produitId);
+            if (produit != null) {
+                produitService.deleteById(produitId);
+                System.out.println("Produit supprimé avec succès !");
+            } else {
+                System.out.println("Aucun Produit trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
 }

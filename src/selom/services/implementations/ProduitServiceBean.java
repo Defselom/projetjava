@@ -124,7 +124,16 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
 
     @Override
     public void deleteById(int produitId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            cn.makeConnection();
+
+            String requeteDelete = "DELETE FROM `Produit` WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteDelete);
+            preparedStmt.setInt(1, produitId);
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
