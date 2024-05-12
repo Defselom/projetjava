@@ -41,7 +41,7 @@ public class ClientController {
     public void saveClient(Client client) {
         try {
             clientService.save(client);
-            System.out.println("Client saved successfully!");
+            System.out.println("Client enregistré avec succès !");
         } catch (Exception e) {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
