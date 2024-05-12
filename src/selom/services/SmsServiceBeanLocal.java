@@ -12,13 +12,14 @@ import selom.entities.Sms;
  * @author m2pro
  */
 public interface SmsServiceBeanLocal {
-    
-    public List<Sms> getAll();
-    
-    public void save(Sms sms);
-    
-    public void modifier();
-    
-    public void supprimer();
-}
 
+    public List<Sms> findAll();
+
+    public void save(Sms sms);
+
+    Sms findById(int smsId);
+
+    int update(final Sms sms);
+
+    void deleteById(int smsId);
+}

@@ -8,9 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import selom.entities.Client;
 import selom.entities.Sms;
 import selom.services.SmsServiceBeanLocal;
 import selom.utils.ConnectDB;
@@ -28,8 +30,33 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
     }
 
     @Override
-    public List<Sms> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Sms> findAll() {
+        List<Sms> allSms = new ArrayList<>();
+        try {
+            //
+            cn.makeConnection();
+            //
+            String RequeteGetAll = "SELECT * FROM `Sms`";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteGetAll);
+
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                Sms sms = new Sms();
+                Client client = new Client();
+                client.setId(rs.getInt("idClient"));
+                sms.setId(rs.getInt("id"));
+                sms.setLibelle(rs.getString("libelle"));
+                sms.setIdClient(client);
+                sms.setStatus(rs.getString("status"));
+
+                allSms.add(sms);
+            }
+            return allSms;
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -57,12 +84,17 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
     }
 
     @Override
-    public void modifier() {
+    public Sms findById(int smsId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void supprimer() {
+    public int update(Sms sms) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteById(int smsId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

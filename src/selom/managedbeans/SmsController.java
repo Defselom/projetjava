@@ -4,8 +4,10 @@
  */
 package selom.managedbeans;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import selom.entities.Client;
 import selom.entities.Sms;
 import selom.services.implementations.SmsServiceBean;
 
@@ -29,6 +31,22 @@ public class SmsController {
         try {
             smsService.save(sms);
             System.out.println("SMS enregistré avec succès !");
+        } catch (Exception e) {
+            Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+    
+     public void getAllSms() {
+        try {
+            List<Sms> allSms = smsService.findAll();
+            System.out.println(" SMS recuperé avec succès !");
+            for (Sms sms : allSms) {
+                System.out.println("ID : " + sms.getId());
+                System.out.println("id Client : " + sms.getIdClient().getId());
+                System.out.println("libellé : " + sms.getLibelle());
+                System.out.println("status : " + sms.getStatus());
+                System.out.println(); 
+            }
         } catch (Exception e) {
             Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
         }
