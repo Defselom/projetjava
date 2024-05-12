@@ -131,7 +131,17 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
 
     @Override
     public void deleteById(int smsId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            cn.makeConnection();
+
+            String requeteDelete = "DELETE FROM `Sms` WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteDelete);
+            preparedStmt.setInt(1, smsId);
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

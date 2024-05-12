@@ -92,4 +92,19 @@ public class SmsController {
         }
     }
     
+     
+      public void deleteById(int  smsId){
+         try {
+            Sms sms = smsService.findById(smsId);
+            if (sms != null) {
+               smsService.deleteById(smsId);
+                System.out.println("SMS supprimé avec succès !");
+            } else {
+                System.out.println("Aucun SMS trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }
