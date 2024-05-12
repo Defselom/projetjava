@@ -7,8 +7,6 @@ package selom.services.implementations;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Date;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import selom.entities.Souscription;
@@ -19,11 +17,11 @@ import selom.utils.ConnectDB;
  *
  * @author m2pro
  */
-public class SousciptionServiceBean implements SouscriptionServiceBeanLocal {
+public class SouscriptionServiceBean implements SouscriptionServiceBeanLocal {
 
     private final ConnectDB cn;
 
-    public SousciptionServiceBean() {
+    public SouscriptionServiceBean() {
         this.cn = new ConnectDB();
     }
 
