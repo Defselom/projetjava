@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,8 +30,30 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
     
     
     @Override
-    public List<Produit> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Produit> findAll() {
+         List<Produit> produits = new ArrayList<>();
+        try {
+            //
+            cn.makeConnection();
+            //
+            String RequeteGetAll = "SELECT * FROM `Produit`";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteGetAll);
+
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                Produit produit = new Produit();
+                produit.setId(rs.getInt("id"));
+                produit.setLibelle(rs.getString("libelle"));
+                produit.setActif(rs.getString("actif"));
+                
+                produits.add(produit);
+            }
+            return produits;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -58,15 +81,41 @@ public class ProduitServiceBean implements ProduitServiceBeanLocal {
     }
 
     @Override
-    public void modifier() {
+    public Produit findById(int produitId) {
+        
+         Produit produit = null;
+        try {
+            cn.makeConnection();
+
+            String requeteGetById = "SELECT * FROM `Produit` WHERE id = ?";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(requeteGetById);
+            PreparedStmt.setInt(1, produitId);
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                produit = new Produit();
+                produit.setId(rs.getInt("id"));
+                produit.setLibelle(rs.getString("libelle"));
+                produit.setActif(rs.getString("actif"));
+            }
+            return produit;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProduitServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public int update(Produit Client) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void supprimer() {
+    public void deleteById(int produitId) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
   
     
 }
