@@ -15,7 +15,7 @@ public interface SouscriptionServiceBeanLocal {
     
     public List<Souscription> getAll();
     
-    public void ajouter();
+    public void save(Souscription souscription);
     
     public void modifier();
     
