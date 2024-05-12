@@ -106,6 +106,26 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
     }
 
     @Override
+    public int update(Client client
+    ) {
+        try {
+            cn.makeConnection();
+            String requeteUpdate = "UPDATE `Client` SET nom = ?, prenom = ?, telephone = ? WHERE id = ?";
+            PreparedStatement preparedStmt = cn.makeConnection().prepareStatement(requeteUpdate);
+            preparedStmt.setString(1, client.getNom());
+            preparedStmt.setString(2, client.getPrenom());
+            preparedStmt.setString(3, client.getTelephone());
+            preparedStmt.setInt(4, client.getId());
+             int rowsUpdated = preparedStmt.executeUpdate();
+             return rowsUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+
+    }
+
+    @Override
     public void deleteById(int clientId
     ) {
         try {
@@ -120,4 +140,5 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
         }
 
     }
+
 }

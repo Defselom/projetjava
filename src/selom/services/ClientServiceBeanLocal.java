@@ -19,5 +19,7 @@ public interface ClientServiceBeanLocal {
     
     Client findById(int clientId);
     
+    int update(final Client Client);
+    
     void deleteById(int clientId);
 }

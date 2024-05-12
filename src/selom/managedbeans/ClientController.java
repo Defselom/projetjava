@@ -83,6 +83,24 @@ public class ClientController {
 
     }
     
+     public void update(Client updateclient){
+         try {
+            Client client = clientService.findById(updateclient.getId());
+            if (client != null) {
+              int rowsUpdated = clientService.update(client);
+               if (rowsUpdated > 0) {
+            System.out.println("Client mis à jour avec succès !");
+                } else {
+                    System.out.println("La mise à jour du client a échoué.");
+                }
+            } else {
+                System.out.println("Aucun client trouvé avec cet ID.");
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
     
     public void deleteById(int clientId){
          try {
