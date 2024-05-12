@@ -5,7 +5,12 @@
 package selom.services.implementations;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,19 +39,28 @@ public class SouscriptionServiceBean implements SouscriptionServiceBeanLocal {
     public void save(Souscription souscription) {
         try {
             // traitement de la date 
-            java.sql.Date myDateData = new java.sql.Date(souscription.getDateHeureSous().getTime());
-          
+            java.util.Date instantDate = new java.util.Date();
+            java.sql.Date nowDate = new java.sql.Date(instantDate.getTime());
+            
+            
             
             cn.makeConnection();
             //
             String RequeteAjout = "INSERT INTO `souscription`(`dateHeureSous`,`actif`,`idClient`,`idProduit`) "
                     + "VALUES (?,?,?,?)";
-            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout);
-            PreparedStmt.setDate(1, myDateData);
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout,Statement.RETURN_GENERATED_KEYS);
+            PreparedStmt.setDate(1, nowDate);
             PreparedStmt.setString(2, souscription.getActif());
             PreparedStmt.setInt(3, souscription.getIdClient().getId());
             PreparedStmt.setInt(4, souscription.getIdProduit().getId());
             PreparedStmt.executeUpdate();
+            
+            
+            ResultSet res = PreparedStmt.getGeneratedKeys();
+            while (res.next()) {
+                int souscriptionId = res.getInt(1);
+                souscription.setId(souscriptionId);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
         }
