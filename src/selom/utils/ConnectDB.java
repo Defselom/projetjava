@@ -25,11 +25,21 @@ public class ConnectDB {
         if (conn == null) {
 
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {                
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
             }
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3309/bd_tppoo_sadzomla", "root", "");
+
+            try {
+                String bd_url = "jdbc:mysql://localhost:3306/bd_tppoo_sadzomla";
+                String user = "root";
+                String pwd = "";
+                conn = DriverManager.getConnection(bd_url, user, pwd);
+            } catch (SQLException e) {
+                Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, e);
+
+            }
+
         }
         return conn;
     }
