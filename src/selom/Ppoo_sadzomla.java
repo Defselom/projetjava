@@ -88,7 +88,7 @@ public class Ppoo_sadzomla {
             ClientParticulier narcisse = new ClientParticulier("ALAN", "Walker", "+22892124689");
             narcisse.setLieuNaissance("lome");
 
-            String date_string = "26-09-1989";
+            String date_string = "26-09-2003";
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date date = formatter.parse(date_string);
 
@@ -97,7 +97,7 @@ public class Ppoo_sadzomla {
             clientController.saveClient(narcisse);
 
             Sms narcisseEpargneSms = new Sms(narcisse, produitEpargne);
-            Souscription narcisseEpargneSouscription = new Souscription("T", narcisse, produitCourant);
+            Souscription narcisseEpargneSouscription = new Souscription("T", narcisse, produitEpargne);
 
             souscriptionController.save(narcisseEpargneSouscription);
 

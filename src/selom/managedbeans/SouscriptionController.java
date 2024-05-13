@@ -34,12 +34,16 @@ public class SouscriptionController {
             Client client = souscription.getIdClient();
             if (client instanceof ClientParticulier) {
                 // Vérifier si le client a moins de 18 ans
+                // Vérifier si le client a plus de 18 ans
                 Date dateActuelle = new Date();
-                long differenceEnMillis = dateActuelle.getTime() - ((ClientParticulier) client).getDateNaissance().getTime();
-                long ageEnMillis = 18L * 365L * 24L * 60L * 60L * 1000L; // 18 ans en millisecondes
-                boolean estMineur = differenceEnMillis < ageEnMillis;
+                long dateNaissanceMillis = ((ClientParticulier) client).getDateNaissance().getTime();
+                long dateActuelleMillis = dateActuelle.getTime();
+                long differenceEnMillis = dateActuelleMillis - dateNaissanceMillis;
 
-                if (estMineur && souscription.getIdProduit().getLibelle().equals("Epargne")) {
+                    // Convertir 18 ans en millisecondes
+                long age18EnMillis = 18L * 365L * 24L * 60L * 60L * 1000L;
+
+                if (differenceEnMillis >= age18EnMillis && souscription.getIdProduit().getLibelle().equals("Epargne")) {
                     System.out.println("Souscription au produit \"Epargne\" autorisée.");
                     souscriptionService.save(souscription);
                 } else {
