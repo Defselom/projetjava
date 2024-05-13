@@ -4,8 +4,11 @@
  */
 package selom;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 import selom.entities.Client;
+import selom.entities.ClientParticulier;
 import selom.entities.Produit;
 import selom.entities.Sms;
 import selom.entities.Souscription;
@@ -125,6 +128,20 @@ public class Ppoo_sadzomla {
 
             //Afficher la liste des SMS déjà envoyés et en attentes d’envoi.
             smsController.getAllSmsByStatus();
+            
+            
+            //client particulier
+            
+            ClientParticulier narcisse = new ClientParticulier("ALAN", "Walker", "+22892124689");
+            narcisse.setLieuNaissance("lome");
+             String date_string = "26-09-1989";
+       //Instantiating the SimpleDateFormat class
+       SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");      
+       //Parsing the given String to Date object
+       Date date = formatter.parse(date_string);
+            narcisse.setDateNaissance(date);
+           clientController.saveClient(narcisse);
+            
 
             //  produitController.saveProduit(cafe);
             //  souscriptionController.save(mySouscription);

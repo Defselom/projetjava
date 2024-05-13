@@ -4,15 +4,14 @@
  */
 package selom.services.implementations;
 
-import com.sun.jdi.connect.spi.Connection;
 import selom.entities.Client;
 import selom.services.ClientServiceBeanLocal;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import selom.entities.ClientParticulier;
 import selom.utils.ConnectDB;
 
 /**
@@ -32,7 +31,13 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
         try {
             //
             cn.makeConnection();
-            //
+
+            // checker le type de client            
+            if (client.getNom() == null || client.getPrenom() == null
+                    || client.getTelephone() == null) {
+                throw new IllegalArgumentException("Tous les champs sont obligatoires!");
+            }
+
             String RequeteAjout = "INSERT INTO `client`(`nom`,`prenom`,`telephone`) "
                     + "VALUES (?,?,?)";
             PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout, Statement.RETURN_GENERATED_KEYS);
@@ -45,7 +50,41 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
             while (res.next()) {
                 int userId = res.getInt(1);
                 client.setId(userId);
+
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void saveClientParticulier(ClientParticulier client) {
+        try {
+            //
+            cn.makeConnection();
+
+            if (client.getNom() == null || client.getPrenom() == null || client.getDateNaissance() == null || client.getTelephone() == null || client.getLieuNaissance() == null) {
+                throw new IllegalArgumentException("Tous les champs sont obligatoires!");
+            }
+            // Convertir java.util.Date en java.sql.Date
+            java.sql.Date date = new java.sql.Date(client.getDateNaissance().getTime());
+            String RequeteAjout = "INSERT INTO `client`(`nom`,`prenom`,`telephone`,`dateNaissance`,`lieuNaissance`) "
+                    + "VALUES (?,?,?,?,?)";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteAjout, Statement.RETURN_GENERATED_KEYS);
+            PreparedStmt.setString(1, client.getNom());
+            PreparedStmt.setString(2, client.getPrenom());
+            PreparedStmt.setString(3, client.getTelephone());
+            PreparedStmt.setDate(4, date);
+            PreparedStmt.setString(5, client.getLieuNaissance());
+            PreparedStmt.executeUpdate();
+
+            ResultSet res = PreparedStmt.getGeneratedKeys();
+            while (res.next()) {
+                int userId = res.getInt(1);
+                client.setId(userId);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -6,6 +6,7 @@ package selom.services;
 
 import java.util.List;
 import selom.entities.Client;
+import selom.entities.ClientParticulier;
 
 /**
  *
@@ -14,6 +15,8 @@ import selom.entities.Client;
 public interface ClientServiceBeanLocal {
     
     void save(final Client client);
+    
+    void saveClientParticulier(final ClientParticulier client);
      
     List<Client> findAll();
     

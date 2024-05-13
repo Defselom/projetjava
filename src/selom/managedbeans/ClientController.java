@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import selom.entities.Client;
+import selom.entities.ClientParticulier;
 import selom.services.implementations.ClientServiceBean;
 
 /**
@@ -46,7 +47,11 @@ public class ClientController {
 
     public void saveClient(Client client) {
         try {
-            clientService.save(client);
+            if (client instanceof ClientParticulier) {
+                clientService.saveClientParticulier((ClientParticulier) client);
+            } else {
+                clientService.save(client);
+            }
             System.out.println("Client enregistré avec succès !");
         } catch (Exception e) {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
