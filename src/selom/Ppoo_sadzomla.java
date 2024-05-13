@@ -107,13 +107,27 @@ public class Ppoo_sadzomla {
             //pour un client de votre choix et le produit « Courant » pour un autre client de votre
             //choix.
             Souscription justinCourantSouscription = new Souscription("T", Justin, produitCourant);
-            
+//            Souscription justinCourantSouscription = new Souscription();
+//            justinCourantSouscription.setActif("T");
+//            justinCourantSouscription.setIdClient(Justin);
+//            justinCourantSouscription.setIdProduit(produitCourant);
+
+//            Souscription justinEpargneSouscription = new Souscription();
+//            justinEpargneSouscription.setActif("T");
+//            justinEpargneSouscription.setIdClient(Justin);
+//            justinEpargneSouscription.setIdProduit(produitEpargne);
+//
+//            Souscription jeanneCourantSouscription = new Souscription();
+//            jeanneCourantSouscription.setActif("T");
+//            jeanneCourantSouscription.setIdClient(Jeanne);
+//            jeanneCourantSouscription.setIdProduit(produitCourant);
+
             Souscription justinEpargneSouscription = new Souscription("T", Justin, produitEpargne);
 
             Souscription jeanneCourantSouscription = new Souscription("T", Jeanne, produitCourant);
-
-            souscriptionController.save(justinCourantSouscription);
             souscriptionController.save(justinEpargneSouscription);
+            souscriptionController.save(justinCourantSouscription);
+
             souscriptionController.save(jeanneCourantSouscription);
 
             //  produitController.saveProduit(cafe);
