@@ -7,7 +7,6 @@ package selom.managedbeans;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import selom.entities.Client;
 import selom.entities.Sms;
 import selom.services.implementations.SmsServiceBean;
 
@@ -56,7 +55,6 @@ public class SmsController {
         try {
             Sms sms = smsService.findById(smsId);
             if (sms != null) {
-                // Afficher les informations du client
                 System.out.println("SMS récupéré avec succès !");
                 System.out.println("ID : " + sms.getId());
                 System.out.println("client id : " + sms.getIdClient().getId());
@@ -72,14 +70,13 @@ public class SmsController {
 
     }
 
-    
-     public void update(Sms updateSms){
-         try {
+    public void update(Sms updateSms) {
+        try {
             Sms sms = smsService.findById(updateSms.getId());
             if (sms != null) {
-              int rowsUpdated = smsService.update(updateSms);
-               if (rowsUpdated > 0) {
-            System.out.println("SMS mis à jour avec succès !");
+                int rowsUpdated = smsService.update(updateSms);
+                if (rowsUpdated > 0) {
+                    System.out.println("SMS mis à jour avec succès !");
                 } else {
                     System.out.println("La mise à jour du SMS a échoué.");
                 }
@@ -91,13 +88,12 @@ public class SmsController {
             Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-     
-      public void deleteById(int  smsId){
-         try {
+
+    public void deleteById(int smsId) {
+        try {
             Sms sms = smsService.findById(smsId);
             if (sms != null) {
-               smsService.deleteById(smsId);
+                smsService.deleteById(smsId);
                 System.out.println("SMS supprimé avec succès !");
             } else {
                 System.out.println("Aucun SMS trouvé avec cet ID.");

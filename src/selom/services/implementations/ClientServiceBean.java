@@ -116,8 +116,8 @@ public class ClientServiceBean implements ClientServiceBeanLocal {
             preparedStmt.setString(2, client.getPrenom());
             preparedStmt.setString(3, client.getTelephone());
             preparedStmt.setInt(4, client.getId());
-             int rowsUpdated = preparedStmt.executeUpdate();
-             return rowsUpdated;
+            int rowsUpdated = preparedStmt.executeUpdate();
+            return rowsUpdated;
         } catch (SQLException ex) {
             Logger.getLogger(ClientServiceBean.class.getName()).log(Level.SEVERE, null, ex);
         }

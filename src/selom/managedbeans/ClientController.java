@@ -28,16 +28,16 @@ public class ClientController {
     }
 
     public void addInitCLient() {
-       
-         try {
-             List<Client> clients = new ArrayList<>();
-        clients.add(new Client("John", "Cross", "+228997"));
-        clients.add(new Client("Elon", "Musk", "+2289494745"));
-        clients.add(new Client("Pirali", "Bibi", "+2287985143558"));
-        clients.add(new Client("Cristal", "Kokou", "+3376528155"));
-        for (Client client : clients) {
-            clientService.save(client);
-        }
+
+        try {
+            List<Client> clients = new ArrayList<>();
+            clients.add(new Client("John", "Cross", "+228997"));
+            clients.add(new Client("Elon", "Musk", "+2289494745"));
+            clients.add(new Client("Pirali", "Bibi", "+2287985143558"));
+            clients.add(new Client("Cristal", "Kokou", "+3376528155"));
+            for (Client client : clients) {
+                clientService.save(client);
+            }
             System.out.println("Client enregistré avec succès !");
         } catch (Exception e) {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
@@ -62,7 +62,7 @@ public class ClientController {
                 System.out.println("Nom : " + client.getNom());
                 System.out.println("Prénom : " + client.getPrenom());
                 System.out.println("Téléphone : " + client.getTelephone());
-                System.out.println(); 
+                System.out.println();
             }
         } catch (Exception e) {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
@@ -88,14 +88,14 @@ public class ClientController {
         }
 
     }
-    
-     public void update(Client updateclient){
-         try {
+
+    public void update(Client updateclient) {
+        try {
             Client client = clientService.findById(updateclient.getId());
             if (client != null) {
-              int rowsUpdated = clientService.update(client);
-               if (rowsUpdated > 0) {
-            System.out.println("Client mis à jour avec succès !");
+                int rowsUpdated = clientService.update(client);
+                if (rowsUpdated > 0) {
+                    System.out.println("Client mis à jour avec succès !");
                 } else {
                     System.out.println("La mise à jour du client a échoué.");
                 }
@@ -107,12 +107,12 @@ public class ClientController {
             Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    public void deleteById(int clientId){
-         try {
+
+    public void deleteById(int clientId) {
+        try {
             Client client = clientService.findById(clientId);
             if (client != null) {
-               clientService.deleteById(clientId);
+                clientService.deleteById(clientId);
                 System.out.println("Client supprimé avec succès !");
             } else {
                 System.out.println("Aucun client trouvé avec cet ID.");

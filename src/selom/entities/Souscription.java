@@ -58,6 +58,13 @@ public class Souscription implements Serializable {
         this.id = id;
     }
 
+    public Souscription(String actif, Client idClient, Produit idProduit) {
+        this.actif = actif;
+        this.idClient = idClient;
+        this.idProduit = idProduit;
+    }
+    
+
     public Integer getId() {
         return id;
     }

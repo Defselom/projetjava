@@ -4,9 +4,11 @@
  */
 package selom.managedbeans;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import selom.entities.Client;
 import selom.entities.Produit;
 import selom.services.implementations.ProduitServiceBean;
 
@@ -54,7 +56,6 @@ public class ProduitController {
         try {
             Produit produit = produitService.findById(produitId);
             if (produit != null) {
-                // Afficher les informations du client
                 System.out.println("Produit récupéré avec succès !");
                 System.out.println("ID : " + produit.getId());
                 System.out.println("Libelle : " + produit.getLibelle());
@@ -100,6 +101,26 @@ public class ProduitController {
 
         } catch (Exception e) {
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    
+    
+    
+    // ajouter epargne et courant
+        public void addInitProduit() {
+
+        try {
+            List<Produit> produits = new ArrayList<>();
+            produits.add(new Produit("Epargne","T"));
+            produits.add(new Produit("Courant","T"));
+            
+            for (Produit produit : produits) {
+                produitService.save(produit);
+            }
+            System.out.println("Produit Epargne , Courant enregistré avec succès !");
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

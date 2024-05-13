@@ -7,7 +7,6 @@ package selom.managedbeans;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import selom.entities.Sms;
 import selom.entities.Souscription;
 import selom.services.implementations.SouscriptionServiceBean;
 
@@ -52,8 +51,8 @@ public class SouscriptionController {
             Logger.getLogger(SouscriptionController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-     public void getById(int souscriptionId) {
+
+    public void getById(int souscriptionId) {
         try {
             Souscription souscription = souscriptionService.findById(souscriptionId);
             if (souscription != null) {
@@ -71,8 +70,8 @@ public class SouscriptionController {
         }
 
     }
-     
-      public void update(Souscription updateSouscription) {
+
+    public void update(Souscription updateSouscription) {
         try {
             Souscription souscription = souscriptionService.findById(updateSouscription.getId());
             if (souscription != null) {
@@ -90,9 +89,8 @@ public class SouscriptionController {
             Logger.getLogger(SouscriptionController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-      
-      
-      public void deleteById(int souscriptionId) {
+
+    public void deleteById(int souscriptionId) {
         try {
             Souscription souscription = souscriptionService.findById(souscriptionId);
             if (souscription != null) {
@@ -106,5 +104,5 @@ public class SouscriptionController {
             Logger.getLogger(SouscriptionController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-      
+
 }

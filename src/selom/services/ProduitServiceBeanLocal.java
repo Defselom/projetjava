@@ -12,14 +12,15 @@ import selom.entities.Produit;
  * @author m2pro
  */
 public interface ProduitServiceBeanLocal {
-      public List<Produit> findAll();
-    
+
+    public List<Produit> findAll();
+
     public void save(Produit produit);
-    
+
     Produit findById(int produitId);
-    
+
     int update(final Produit Client);
-    
+
     void deleteById(int produitId);
 
 }
