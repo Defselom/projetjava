@@ -4,9 +4,12 @@
  */
 package selom.managedbeans;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import selom.entities.Client;
+import selom.entities.ClientParticulier;
 import selom.entities.Souscription;
 import selom.services.implementations.SouscriptionServiceBean;
 
@@ -28,8 +31,25 @@ public class SouscriptionController {
 
     public void save(Souscription souscription) {
         try {
-            souscriptionService.save(souscription);
-            System.out.println("Souscription enregistré avec succès !");
+            Client client = souscription.getIdClient();
+            if (client instanceof ClientParticulier) {
+                // Vérifier si le client a moins de 18 ans
+                Date dateActuelle = new Date();
+                long differenceEnMillis = dateActuelle.getTime() - ((ClientParticulier) client).getDateNaissance().getTime();
+                long ageEnMillis = 18L * 365L * 24L * 60L * 60L * 1000L; // 18 ans en millisecondes
+                boolean estMineur = differenceEnMillis < ageEnMillis;
+
+                if (estMineur && souscription.getIdProduit().getLibelle().equals("Epargne")) {
+                    System.out.println("Souscription au produit \"Epargne\" autorisée.");
+                    souscriptionService.save(souscription);
+                } else {
+                    System.out.println("Impossible de souscrire à ce produit pour le moment.");
+                }
+            } else {
+                souscriptionService.save(souscription);
+                System.out.println("Souscription enregistrée avec succès !");
+            }
+
         } catch (Exception e) {
             Logger.getLogger(SouscriptionController.class.getName()).log(Level.SEVERE, null, e);
         }

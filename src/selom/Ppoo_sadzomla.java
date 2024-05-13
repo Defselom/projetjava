@@ -41,52 +41,7 @@ public class Ppoo_sadzomla {
         SmsController smsController = new SmsController(monSmsService);
         SouscriptionController souscriptionController = new SouscriptionController(maSouscriptionService);
 
-        // Create a Logger with class name GFG 
-        // Logger logger= Logger.getLogger(Ppoo_sadzomla.class.getName());
-        // Call info method 
-//        logger.info("Message 1");
-//        logger.info("Message 2");
-        // create client
-//        Client def = new Client();
-//        def.setNom("defselom");
-//        def.setPrenom("elolo");
-//        def.setTelephone("99780518");
-//
-//        // create produit
-//        Produit cafe = new Produit();
-//        cafe.setLibelle("Coca cola");
-//        cafe.setActif("T");
-//
-//        // create sms
-//        Sms mySms = new Sms();
-//        mySms.setIdClient(def);
-//        mySms.setLibelle("Merci pour votre achat");
-//        mySms.setStatus("en Attente");
-//
-//        // create souscription
-//        Souscription mySouscription = new Souscription();
-//        mySouscription.setIdClient(def);
-//        mySouscription.setIdProduit(cafe);
-//        mySouscription.setActif("T");
-//// Set other properties of the client as needed
-//        try {
-//            // Call the save method to save the client
-//            clientController.saveClient(def);
-//            //  produitController.saveProduit(cafe);
-//            //  souscriptionController.save(mySouscription);
-//            //  smsController.save(mySms);
-//            //  clientController.getAllClient();
-//            //  clientController.getById(2);
-//            //clientController.deleteById(2);
-//            def.setId(2098);
-//            clientController.update(def);
-//        } catch (Exception e) {
-//            // Handle any exceptions that may occur during the saving process
-//            System.err.println("Error saving : " + e.getMessage());
-//        }
-//
-//    }
-// Manipulation des classes
+        // Manipulation des classes
         try {
             //Avec le contrôleur du Client, ajouter quatre (04) clients.
             Client Justin = new Client("NEON", "Justin", "+22890122334");
@@ -128,31 +83,25 @@ public class Ppoo_sadzomla {
 
             //Afficher la liste des SMS déjà envoyés et en attentes d’envoi.
             smsController.getAllSmsByStatus();
-            
-            
+
             //client particulier
-            
             ClientParticulier narcisse = new ClientParticulier("ALAN", "Walker", "+22892124689");
             narcisse.setLieuNaissance("lome");
-             String date_string = "26-09-1989";
-       //Instantiating the SimpleDateFormat class
-       SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");      
-       //Parsing the given String to Date object
-       Date date = formatter.parse(date_string);
-            narcisse.setDateNaissance(date);
-           clientController.saveClient(narcisse);
-            
 
-            //  produitController.saveProduit(cafe);
-            //  souscriptionController.save(mySouscription);
-            //  smsController.save(mySms);
-            //  clientController.getAllClient();
-            //  clientController.getById(2);
-            //clientController.deleteById(2);
-//            def.setId(2098);
-//            clientController.update(def);
+            String date_string = "26-09-1989";
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = formatter.parse(date_string);
+
+            narcisse.setDateNaissance(date);
+
+            clientController.saveClient(narcisse);
+
+            Sms narcisseEpargneSms = new Sms(narcisse, produitEpargne);
+            Souscription narcisseEpargneSouscription = new Souscription("T", narcisse, produitCourant);
+
+            souscriptionController.save(narcisseEpargneSouscription);
+
         } catch (Exception e) {
-            // Handle any exceptions that may occur during the saving process
             System.err.println("Error on running program : " + e.getMessage());
         }
     }
