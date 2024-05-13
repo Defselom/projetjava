@@ -28,13 +28,19 @@ public class ClientController {
     }
 
     public void addInitCLient() {
-        List<Client> clients = new ArrayList<>();
+       
+         try {
+             List<Client> clients = new ArrayList<>();
         clients.add(new Client("John", "Cross", "+228997"));
         clients.add(new Client("Elon", "Musk", "+2289494745"));
         clients.add(new Client("Pirali", "Bibi", "+2287985143558"));
         clients.add(new Client("Cristal", "Kokou", "+3376528155"));
         for (Client client : clients) {
             clientService.save(client);
+        }
+            System.out.println("Client enregistré avec succès !");
+        } catch (Exception e) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
