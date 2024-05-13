@@ -52,13 +52,13 @@ public class Sms implements Serializable {
     }
 
     public Sms(Client idClient) {
-        this.libelle = idClient.getPrenom() + " Votre souscrition au produit est effectue";
+        this.libelle = idClient.getPrenom() + " Votre souscrition au produit est effectué avec succes";
         this.status = "En Attente";
         this.idClient = idClient;
     }
 
     public Sms(Client idClient, Produit produit) {
-        this.libelle = "Felicitation  " + idClient.getPrenom() + "\n Votre souscrition au produit " + produit.getLibelle() + " est effectue avec succes";
+        this.libelle = "Félicitation  " + idClient.getPrenom() + "\n Votre souscrition au produit " + produit.getLibelle() + " est effectué avec succes";
         this.status = "En Attente";
         this.idClient = idClient;
     }

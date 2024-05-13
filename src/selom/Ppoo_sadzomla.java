@@ -115,14 +115,14 @@ public class Ppoo_sadzomla {
             souscriptionController.save(jeanneCourantSouscription);
 
             //Enregistrer aussi les SMS de souscriptions
-            Sms justinCourantSms = new Sms("Souscription au compte Courant", Justin);
-            Sms justinEpargneSms = new Sms("Souscription au compte Epargne", Justin);
-            Sms JeanneCourantSms = new Sms("Souscription au compte Courant", Jeanne);
+            Sms justinCourantSms = new Sms(Justin, produitCourant);
+            Sms justinEpargneSms = new Sms(Justin, produitEpargne);
+            Sms JeanneCourantSms = new Sms(Jeanne, produitCourant);
 
             smsController.save(justinCourantSms);
             smsController.save(justinEpargneSms);
             smsController.save(JeanneCourantSms);
-            
+
             //Afficher la liste des SMS déjà envoyés et en attentes d’envoi.
             smsController.getAllSmsByStatus();
 
