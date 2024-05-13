@@ -50,6 +50,19 @@ public class Produit implements Serializable {
         this.id = id;
     }
 
+    public Produit(String libelle, String actif) {
+        this.libelle = libelle;
+        this.actif = actif;
+    }
+
+    
+    
+    public Produit(Integer id, String libelle, String actif) {
+        this.id = id;
+        this.libelle = libelle;
+        this.actif = actif;
+    }
+
     public Integer getId() {
         return id;
     }
