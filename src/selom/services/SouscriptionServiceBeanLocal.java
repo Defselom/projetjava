@@ -13,11 +13,13 @@ import selom.entities.Souscription;
  */
 public interface SouscriptionServiceBeanLocal {
     
-    public List<Souscription> getAll();
-    
+    public List<Souscription> findAll();
+
     public void save(Souscription souscription);
-    
-    public void modifier();
-    
-    public void supprimer();
+
+    Souscription findById(int souscriptionId);
+
+    int update(final Souscription souscription);
+
+    void deleteById(int souscriptionId);
 }
