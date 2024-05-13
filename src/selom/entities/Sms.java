@@ -51,15 +51,18 @@ public class Sms implements Serializable {
         this.id = id;
     }
 
+    public Sms(String libelle, Client idClient) {
+        this.libelle = libelle;
+        this.status = "En Attente";
+        this.idClient = idClient;
+    }
+
     public Sms(String libelle, String status, Client idClient) {
         this.libelle = libelle;
         this.status = status;
         this.idClient = idClient;
     }
 
-    
-    
-    
     public Integer getId() {
         return id;
     }
@@ -116,5 +119,5 @@ public class Sms implements Serializable {
     public String toString() {
         return "ppoo_sadzomla.Sms[ id=" + id + " ]";
     }
-    
+
 }

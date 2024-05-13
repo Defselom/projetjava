@@ -144,4 +144,64 @@ public class SmsServiceBean implements SmsServiceBeanLocal {
 
     }
 
+    @Override
+    public List<Sms> findAllSmsSend() {
+        List<Sms> allSmsSend = new ArrayList<>();
+        try {
+            //
+            cn.makeConnection();
+            //
+            String RequeteGetAll = "SELECT * FROM `Sms` where status = \"Envoyé\"";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteGetAll);
+
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                Sms sms = new Sms();
+                Client client = new Client();
+                client.setId(rs.getInt("idClient"));
+                sms.setId(rs.getInt("id"));
+                sms.setLibelle(rs.getString("libelle"));
+                sms.setIdClient(client);
+                sms.setStatus(rs.getString("status"));
+
+                allSmsSend.add(sms);
+            }
+            return allSmsSend;
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Sms> findAllSmsPending() {
+        List<Sms> allSmsPending = new ArrayList<>();
+        try {
+            //
+            cn.makeConnection();
+            //
+            String RequeteGetAll = "SELECT * FROM `Sms` where status = \"En Attente\"";
+            PreparedStatement PreparedStmt = cn.makeConnection().prepareStatement(RequeteGetAll);
+
+            ResultSet rs = PreparedStmt.executeQuery();
+
+            while (rs.next()) {
+                Sms sms = new Sms();
+                Client client = new Client();
+                client.setId(rs.getInt("idClient"));
+                sms.setId(rs.getInt("id"));
+                sms.setLibelle(rs.getString("libelle"));
+                sms.setIdClient(client);
+                sms.setStatus(rs.getString("status"));
+
+                allSmsPending.add(sms);
+            }
+            return allSmsPending;
+        } catch (SQLException ex) {
+            Logger.getLogger(SmsServiceBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

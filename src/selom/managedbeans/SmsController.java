@@ -28,6 +28,7 @@ public class SmsController {
 
     public void save(Sms sms) {
         try {
+            sms.setStatus("Envoyé");
             smsService.save(sms);
             System.out.println("SMS enregistré avec succès !");
         } catch (Exception e) {
@@ -103,4 +104,43 @@ public class SmsController {
             Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public void getAllSmsByStatus() {
+        try {
+            List<Sms> allSmsPending = smsService.findAllSmsPending();
+            List<Sms> allSmsSend = smsService.findAllSmsSend();
+
+            System.out.println("Requète effectué avec succès !");
+
+            if (allSmsSend.isEmpty()) {
+                System.out.println("Aucun SMS envoyé trouvé");
+            } else {
+                System.out.println(" SMS envoyé recuperé avec succès !");
+                for (Sms sms : allSmsSend) {
+                    System.out.println("ID : " + sms.getId());
+                    System.out.println("id Client : " + sms.getIdClient().getId());
+                    System.out.println("libellé : " + sms.getLibelle());
+                    System.out.println("status : " + sms.getStatus());
+                    System.out.println();
+                }
+            }
+
+            if (allSmsPending.isEmpty()) {
+                System.out.println("Aucun SMS en Attente trouvé");
+            } else {
+                System.out.println(" SMS en Attente recuperé avec succès !");
+                for (Sms sms : allSmsSend) {
+                    System.out.println("ID : " + sms.getId());
+                    System.out.println("id Client : " + sms.getIdClient().getId());
+                    System.out.println("libellé : " + sms.getLibelle());
+                    System.out.println("status : " + sms.getStatus());
+                    System.out.println();
+                }
+            }
+
+        } catch (Exception e) {
+            Logger.getLogger(SmsController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
 }

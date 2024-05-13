@@ -17,9 +17,13 @@ public interface SmsServiceBeanLocal {
 
     public void save(Sms sms);
 
-    Sms findById(int smsId);
+    public Sms findById(int smsId);
 
-    int update(final Sms sms);
+    public int update(final Sms sms);
 
     void deleteById(int smsId);
+    
+    public List<Sms>  findAllSmsSend();
+    
+    public List<Sms>  findAllSmsPending();
 }
