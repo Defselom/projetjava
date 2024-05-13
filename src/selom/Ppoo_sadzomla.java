@@ -107,28 +107,24 @@ public class Ppoo_sadzomla {
             //pour un client de votre choix et le produit « Courant » pour un autre client de votre
             //choix.
             Souscription justinCourantSouscription = new Souscription("T", Justin, produitCourant);
-//            Souscription justinCourantSouscription = new Souscription();
-//            justinCourantSouscription.setActif("T");
-//            justinCourantSouscription.setIdClient(Justin);
-//            justinCourantSouscription.setIdProduit(produitCourant);
-
-//            Souscription justinEpargneSouscription = new Souscription();
-//            justinEpargneSouscription.setActif("T");
-//            justinEpargneSouscription.setIdClient(Justin);
-//            justinEpargneSouscription.setIdProduit(produitEpargne);
-//
-//            Souscription jeanneCourantSouscription = new Souscription();
-//            jeanneCourantSouscription.setActif("T");
-//            jeanneCourantSouscription.setIdClient(Jeanne);
-//            jeanneCourantSouscription.setIdProduit(produitCourant);
-
             Souscription justinEpargneSouscription = new Souscription("T", Justin, produitEpargne);
-
             Souscription jeanneCourantSouscription = new Souscription("T", Jeanne, produitCourant);
+
             souscriptionController.save(justinEpargneSouscription);
             souscriptionController.save(justinCourantSouscription);
-
             souscriptionController.save(jeanneCourantSouscription);
+
+            //Enregistrer aussi les SMS de souscriptions
+            Sms justinCourantSms = new Sms("Souscription au compte Courant", Justin);
+            Sms justinEpargneSms = new Sms("Souscription au compte Epargne", Justin);
+            Sms JeanneCourantSms = new Sms("Souscription au compte Courant", Jeanne);
+
+            smsController.save(justinCourantSms);
+            smsController.save(justinEpargneSms);
+            smsController.save(JeanneCourantSms);
+            
+            //Afficher la liste des SMS déjà envoyés et en attentes d’envoi.
+            smsController.getAllSmsByStatus();
 
             //  produitController.saveProduit(cafe);
             //  souscriptionController.save(mySouscription);
@@ -140,7 +136,7 @@ public class Ppoo_sadzomla {
 //            clientController.update(def);
         } catch (Exception e) {
             // Handle any exceptions that may occur during the saving process
-            System.err.println("Error saving : " + e.getMessage());
+            System.err.println("Error on running program : " + e.getMessage());
         }
     }
 }

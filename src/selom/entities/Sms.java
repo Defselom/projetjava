@@ -51,6 +51,18 @@ public class Sms implements Serializable {
         this.id = id;
     }
 
+    public Sms(Client idClient) {
+        this.libelle = idClient.getPrenom() + " Votre souscrition au produit est effectue";
+        this.status = "En Attente";
+        this.idClient = idClient;
+    }
+
+    public Sms(Client idClient, Produit produit) {
+        this.libelle = "Felicitation  " + idClient.getPrenom() + "\n Votre souscrition au produit " + produit.getLibelle() + " est effectue avec succes";
+        this.status = "En Attente";
+        this.idClient = idClient;
+    }
+
     public Sms(String libelle, Client idClient) {
         this.libelle = libelle;
         this.status = "En Attente";
