@@ -51,6 +51,15 @@ public class Sms implements Serializable {
         this.id = id;
     }
 
+    public Sms(String libelle, String status, Client idClient) {
+        this.libelle = libelle;
+        this.status = status;
+        this.idClient = idClient;
+    }
+
+    
+    
+    
     public Integer getId() {
         return id;
     }
